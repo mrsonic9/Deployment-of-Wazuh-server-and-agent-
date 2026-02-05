@@ -20,3 +20,30 @@ I modified the Wazuh agent configuration file (`ossec.conf`) on the Windows endp
 **Code Configuration:**
 ```xml
 <directories check_all="yes" realtime="yes">C:\Users\zubair\Documents</directories>
+
+<br>
+
+---
+
+## 🛡️ Part 2: Active Response (Automated Defense)
+
+Moving beyond detection, I configured an **Intrusion Prevention System (IPS)** capability to automatically block attackers attempting to brute-force access to the Windows endpoint.
+
+### 1. The "Brain" (Manager Configuration)
+I configured the Wazuh Manager to trigger a defensive script whenever it detects a **Brute Force Attack** (Rule ID 60122 - Multiple Failed Logins).
+
+**Configuration (`ossec.conf`):**
+```xml
+<command>
+  <name>win_route-null</name>
+  <executable>route-null.exe</executable>
+  <expect>srcip</expect>
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+
+<active-response>
+  <command>win_route-null</command>
+  <location>local</location>
+  <rules_id>60122</rules_id>
+  <timeout>60</timeout>
+</active-response>
