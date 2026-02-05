@@ -18,9 +18,9 @@ In this project, I configured the Wazuh SIEM to perform real-time File Integrity
 I modified the Wazuh agent configuration file (`ossec.conf`) on the Windows endpoint to target specific user directories. I enabled `realtime="yes"` to ensure alerts are triggered instantly rather than waiting for scheduled scans.
 
 **Code Configuration:**
-```xml
-<directories check_all="yes" realtime="yes">C:\Users\zubair\Documents</directories>
-
+```
+<directories check_all="yes" realtime="yes">C:\Users\zubair\Documents</directories>  
+ ```
 <br>
 
 ---
@@ -47,3 +47,4 @@ I configured the Wazuh Manager to trigger a defensive script whenever it detects
   <rules_id>60122</rules_id>
   <timeout>60</timeout>
 </active-response>
+```
